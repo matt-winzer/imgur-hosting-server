@@ -10,6 +10,7 @@ const port = parseInt(process.env.PORT || 3000)
 
 // ROUTES
 const indexRoutes = require('./routes/index')
+const imagesRoutes = require('./routes/images')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -18,7 +19,7 @@ app.use(cors({ origin: true, credentials: true })) // <= Disable if you don't ne
 
 // ENDPOINTS
 app.use('/', indexRoutes)
-
+app.use('/api/images', imagesRoutes)
 // The following 2 `app.use`'s MUST follow ALL your routes/middleware
 app.use(notFound)
 app.use(errorHandler)
