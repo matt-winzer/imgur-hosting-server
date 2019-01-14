@@ -8,15 +8,16 @@ const cors = require('cors')
 const app = module.exports = express()
 const port = parseInt(process.env.PORT || 3000)
 
+// ROUTES
+const indexRoutes = require('./routes/index')
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan(process.env.NODE_ENV !== 'production' ? 'dev' : 'combined'))
 app.use(cors({ origin: true, credentials: true })) // <= Disable if you don't need CORS
-// TODO: Optional Static file handler:
-// app.use('/', express.static('./build'))
 
-// TODO: ADD (MOUNT) YOUR MIDDLEWARE (ROUTES) HERE:
-// Example: app.use('/api/cat', require('./routes/cat'))
+// ENDPOINTS
+app.use('/', indexRoutes)
 
 // The following 2 `app.use`'s MUST follow ALL your routes/middleware
 app.use(notFound)
