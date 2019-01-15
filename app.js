@@ -1,6 +1,7 @@
 // From Dan's Guides: https://github.com/justsml/guides/tree/master/express/setup-guide
 // TODO: INSTALL PRE-REQS:
 //  npm install express cors body-parser morgan nodemon
+require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
