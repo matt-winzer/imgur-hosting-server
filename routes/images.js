@@ -1,32 +1,27 @@
 const express = require('express')
 const router = express.Router()
-const controller = require('../controllers/imagesController')
 const multer = require('multer')
 const upload = multer()
-const fetch = require('node-fetch')
-const FormData = require('form-data')
-const fs = require('fs')
+const controller = require('../controllers/imagesController')
 
-const imgurApi = 'https://api.imgur.com/3/image'
+// UTILITIES
+const postToImgur = require('../utils/imgur')
+const createForm = require('../utils/form')
 
 router.get('/', controller.imageTest)
 
 router.post('/upload', upload.single('image'), (req, res, next) => {
-  const file = req.file
-  const body = req.body
+  const image = req.file.buffer
+  const title = req.body.title || ''
+  const description = req.body.description || ''
+  const form = createForm(image, title, description)
 
-  // console.log(file)
-
-  let form = new FormData()
-  form.append('image', file.buffer)
-  form.append('title', req.body.title)
-  form.append('description', 'An image uploaded through my proxy server')
-  form.append('name', req.file.originalname)
-
-  console.log(form)
-  fetch()
-
-  res.json({ msg: 'Trying!' })
+  postToImgur(form)
+    .then(res => res.json())
+    .then(response => {
+      res.json(response)
+    })
+    .catch(next)
 })
 
 module.exports = router

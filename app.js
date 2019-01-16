@@ -13,6 +13,7 @@ const port = parseInt(process.env.PORT || 3000)
 const indexRoutes = require('./routes/index')
 const imagesRoutes = require('./routes/images')
 
+// MIDDLEWARE
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(morgan(process.env.NODE_ENV !== 'production' ? 'dev' : 'combined'))
