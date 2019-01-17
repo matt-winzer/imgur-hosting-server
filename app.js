@@ -9,6 +9,8 @@ const cors = require('cors')
 const app = module.exports = express()
 const port = parseInt(process.env.PORT || 3000)
 
+console.log(process.env.ACCESS_TOKEN)
+
 // ROUTES
 const indexRoutes = require('./routes/index')
 const imagesRoutes = require('./routes/images')

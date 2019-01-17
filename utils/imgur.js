@@ -1,7 +1,7 @@
 const fetch = require('node-fetch')
 const imgurApi = 'https://api.imgur.com/3/image'
 
-module.exports = (form) => {
+function postToImgur(form) {
   return fetch(imgurApi, {
     method: 'POST',
     headers: {
@@ -10,4 +10,16 @@ module.exports = (form) => {
     },
     body: form
   })
+}
+
+function refreshImgurToken(form) {
+  return fetch('https://api.imgur.com/oauth2/token', {
+    method: 'POST',
+    body: form
+  })
+}
+
+module.exports = {
+  postToImgur,
+  refreshImgurToken
 }
